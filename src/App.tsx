@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
+import {Fragment, useCallback, useState} from 'react';
+import {Checkbox} from './components/Checkbox';
+import {Recipes} from './components/Recipes';
+
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/',
+  cache: new InMemoryCache()
+});
+
+const AppComponent = () => {
+  const [isVegetarian, setIsVegetarian] = useState(false);
+  const onChange = useCallback((checked) => {
+    setIsVegetarian(checked);
+  }, [setIsVegetarian]);
+
+  return (
+    <Fragment>
+      <div children='React Apollo App' />
+      <br />
+      <Checkbox onChange={onChange} />
+      <Recipes isVegetarian={isVegetarian} />
+    </Fragment>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <AppComponent />
+    </ApolloProvider>
   );
 }
 
