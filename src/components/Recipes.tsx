@@ -1,15 +1,6 @@
 import {useQuery} from "@apollo/client";
-import {gql} from "graphql-tag";
+import {GET_RECIPES} from "../queries/queries";
 import {Recipe} from "../types/types";
-
-const GET_RECIPES = gql`
-query recipes($vegetarian: Boolean!) {
-  recipes(vegetarian: $vegetarian) {
-    id
-    title
-  }
-}
-`;
 
 interface RecipesProps {
   isVegetarian?: boolean;
