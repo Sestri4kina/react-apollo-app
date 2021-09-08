@@ -5,6 +5,7 @@ query recipes($vegetarian: Boolean!) {
   recipes(vegetarian: $vegetarian) {
     id
     title
+    isStarred @client
   }
 }
 `;

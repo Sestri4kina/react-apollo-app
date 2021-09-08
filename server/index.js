@@ -8,6 +8,7 @@ const resolvers = require("./resolvers");
 const typeDefs = gql`
   type Query {
     recipes(vegetarian: Boolean): [Recipe!]
+    recipe(id: ID!): Recipe!
     # ingredients: [Ingredient!]
   }
 

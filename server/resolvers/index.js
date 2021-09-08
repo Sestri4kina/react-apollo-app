@@ -1,4 +1,4 @@
-const { getRecipes, addRecipe } = require("../models/Recipe");
+const { getRecipes, addRecipe, getRecipe } = require("../models/Recipe");
 // const { getIngredient, getIngredients } = require("../models/Ingredient");
 const sleep = require("../utils/sleep");
 
@@ -14,6 +14,10 @@ module.exports = {
     recipes: async (_, args) => {
       await sleep(global.delay);
       return getRecipes(args);
+    },
+    recipe: async (_, args) => {
+      await sleep(global.delay);
+      return getRecipe(args);
     }
     // ingredients: async (_, args) => {
     //   await sleep(global.delay)

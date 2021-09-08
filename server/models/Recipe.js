@@ -39,4 +39,17 @@ const addRecipe = async input => {
   return addId(recipe);
 };
 
-module.exports = { getRecipes, addRecipe };
+/**
+ * Get a recipe by id 
+ *
+ * @param {String} id
+ *
+ * @returns {Promise<Recipe>}
+ */
+ const getRecipe = async ({id}) => {
+  const recipes = await recipeDb.find({});
+
+  return recipes.find(recipe => recipe._id === id);
+};
+
+module.exports = { getRecipes, addRecipe, getRecipe };
