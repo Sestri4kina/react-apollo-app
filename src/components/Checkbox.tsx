@@ -10,7 +10,7 @@ export const Checkbox = ({value, children, onChange}: CheckboxProps) => {
     const  [isChecked, setIsChecked] = useState(value ?? false);
 
     useEffect(() => {
-        if (value && value !== isChecked) {
+        if (value !== undefined && value !== isChecked) {
             setIsChecked(value ?? false);
         } 
     }, [value, isChecked]);

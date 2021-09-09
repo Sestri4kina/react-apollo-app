@@ -1,6 +1,6 @@
-import {useApolloClient, useQuery} from "@apollo/client";
+import {useApolloClient} from "@apollo/client";
 import {useCallback} from "react";
-import {GET_RECIPES} from "../queries/queries";
+import {useFetchRecipes} from "../hooks/fetch-recipes";
 import {Recipe} from "../types/types";
 
 interface RecipesProps {
@@ -10,9 +10,7 @@ interface RecipesProps {
 const LOCAL_STORAGE_KEY = 'raa_starredRecipes';
 
 export const Recipes = ({isVegetarian = false}: RecipesProps) => {
-    const {data, loading, error} = useQuery<
-        {recipes: Recipe[]}, {vegetarian: boolean}
-    >(GET_RECIPES, {variables: {vegetarian: isVegetarian}});
+    const {data, loading, error} = useFetchRecipes(isVegetarian);
 
     if (loading) {return <div children='Loading...' />;}
     if (error) {return <div children={error} />;}
@@ -21,8 +19,8 @@ export const Recipes = ({isVegetarian = false}: RecipesProps) => {
         <div>
             {
                 data?.recipes
-                    .map(({title, id, isStarred}) =>
-                        (<OneRecipe key={id} id={id} title={title} isStarred={isStarred} />)
+                    .map(({id, ...rest}) =>
+                        (<OneRecipe key={id} id={id} {...rest} />)
                     )
             }
         </div>

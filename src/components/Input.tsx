@@ -10,7 +10,7 @@ export const Input = ({value: defaultValue, labelText, onChange}: InputProps) =>
     const [value, setValue] = useState(defaultValue ?? '');
 
     useEffect(() => {
-        if (defaultValue && value !== defaultValue) {
+        if (defaultValue !== undefined && value !== defaultValue) {
             setValue(defaultValue ?? '');
         } 
     }, [value, defaultValue]);
